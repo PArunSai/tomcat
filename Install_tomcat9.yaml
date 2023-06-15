@@ -84,7 +84,7 @@
     - name: Deploy WAR file
       copy:
         src: addressbook (5).war
-        dest: /opt/apache-tomcat-9.0.50/webapps/your-app.war
+        dest: /opt/apache-tomcat-9.0.50/webapps/addressbook (5).war
         remote_src: yes
       notify:
         - Restart Tomcat
