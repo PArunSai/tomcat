@@ -1,0 +1,59 @@
+---
+- name: Install Tomcat 9 and deploy WAR file
+  hosts: myserver
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Java
+      apt:
+        name: openjdk-8-jdk
+        state: present
+
+    - name: Download Tomcat 9
+      get_url:
+        url: "https://downloads.apache.org/tomcat/tomcat-9/v9.0.50/bin/apache-tomcat-9.0.50.tar.gz"
+        dest: /tmp/apache-tomcat-9.0.50.tar.gz
+
+    - name: Extract Tomcat archive
+      unarchive:
+        src: /tmp/apache-tomcat-9.0.50.tar.gz
+        dest: /opt
+        remote_src: yes
+        creates: /opt/apache-tomcat-9.0.50
+
+    - name: Update Tomcat permissions
+      file:
+        path: /opt/apache-tomcat-9.0.50/bin/*.sh
+        mode: 0755
+
+    - name: Create Tomcat systemd service
+      template:
+        src: tomcat.service.j2
+        dest: /etc/systemd/system/tomcat.service
+
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+
+    - name: Start Tomcat service
+      service:
+        name: tomcat
+        state: started
+        enabled: yes
+
+    - name: Deploy WAR file
+      copy:
+        src: your-app.war
+        dest: /opt/apache-tomcat-9.0.50/webapps/your-app.war
+        remote_src: yes
+      notify:
+        - Restart Tomcat
+
+  handlers:
+    - name: Restart Tomcat
+      service:
+        name: tomcat
+        state: restarted
