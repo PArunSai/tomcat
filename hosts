@@ -1,2 +1,2 @@
 [myserver]
- 172.31.41.194 arunsai21=ubuntu
+ 172.31.41.194 ansible_user=ubuntu
