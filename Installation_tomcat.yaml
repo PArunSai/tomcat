@@ -65,9 +65,7 @@
         src: context.xml
         dest: /opt/apache-tomcat-9.0.76/webapps/manager/META-INF
     #    remote_src: yes
-     notify:
-       - Reload SystemD
-       - Restart tomcat
+     
    - name: copy host manager context.xml
      copy:
         src: hostmanager-context.xml
