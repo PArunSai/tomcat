@@ -7,18 +7,13 @@
       name: openjdk-8-jdk-headless
       update_cache: yes
       state: present
-   - name:  install net-tools
-     apt:
-      name: net-tools
-      update_cache: yes
-      state: present
    - name: Create the group
      group: 
-      name: www-data
+      name: ubuntu
       state: present
    - name: Create the user
      user:
-        name: www-data
+        name: ubuntu
         state: present
    - name: Download Tomcat
      get_url:  
@@ -30,8 +25,8 @@
       src: /tmp/apache-tomcat-9.0.76.tar.gz 
       dest: /opt/
       mode: 0755
-      group: www-data
-      owner: www-data
+      group: ubuntu
+      owner: ubuntu
       remote_src: yes
 
    - name: Copy the user role tomcat-users.xml
