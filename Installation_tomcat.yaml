@@ -7,7 +7,7 @@
        update_cache: yes
    - name: Download Open JDK
      apt:
-      name: openjdk-8
+      name: openjdk-8-jdk-headless
       update_cache: yes
       state: present
    - name: Create the group
