@@ -2,9 +2,12 @@
 - hosts: myserver
   become: yes
   tasks:
+   - name: Update apt cache
+     apt:
+       update_cache: yes
    - name: Download Open JDK
      apt:
-      name: openjdk-8-jdk-headless
+      name: openjdk-8
       update_cache: yes
       state: present
    - name: Create the group
@@ -56,10 +59,7 @@
         [Install]
         WantedBy=multi-user.target
       dest: /etc/systemd/system/tomcat.service
-     notify:
-       - Reload SystemD
-       - Restart tomcat 
-
+     
    - name: copy manager context.xml
      copy:
         src: context.xml
@@ -82,7 +82,7 @@
        - Reload SystemD
        - Restart tomcat
 
-   - name: restart tomcat
+   - name: restart tomcat service
      systemd:
         name: tomcat
         enabled: yes
@@ -92,7 +92,7 @@
     - name: Reload SystemD
       systemd:
         daemon-reload: yes
-    - name: Restart tomcat
+    - name: Restart tomcat service
       systemd:
         name: tomcat
         enabled: yes
