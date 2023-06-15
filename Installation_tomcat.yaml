@@ -12,11 +12,11 @@
       state: present
    - name: Create the group
      group: 
-      name: ubuntu
+      name: arun_ubuntu
       state: present
    - name: Create the user
      user:
-        name: ubuntu
+        name: arun_ubuntu
         state: present
    - name: Download Tomcat
      get_url:  
@@ -28,8 +28,8 @@
       src: /tmp/apache-tomcat-9.0.76.tar.gz 
       dest: /opt/
       mode: 0755
-      group: ubuntu
-      owner: ubuntu
+      group: arun_ubuntu
+      owner: arun_ubuntu
       remote_src: yes
 
    - name: Copy the user role tomcat-users.xml
@@ -47,8 +47,8 @@
         After=network.target
         [Service]
         Type=forking
-        User=ubuntu
-        Group=ubuntu
+        User=arun_ubuntu
+        Group=arun_ubuntu
         Environment="CATALINA_PID=/opt/apache-tomcat-9.0.76/logs/tomcat.pid"
         Environment="CATALINA_BASE=/opt/apache-tomcat-9.0.76"
         Environment="CATALINA_HOME=/opt/apache-tomcat-9.0.76"
