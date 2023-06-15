@@ -1,2 +1,2 @@
 [myserver]
-172.31.1.139 ansible_user=ec2-user
+172.31.44.192 ansible_user=ubuntu
