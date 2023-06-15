@@ -18,8 +18,8 @@
         dest: /tmp/apache-tomcat-9.0.50.tar.gz
         
     - name: Creating a service file
-      copy:
-      content: |-
+       copy:
+       content: |-
         [Unit]
         Description=Tomcat Service
         Requires=network.target
@@ -41,7 +41,7 @@
        - Restart tomcat 
 
     - name: copy manager context.xml
-      copy:
+       copy:
         src: context.xml
         dest: /opt/apache-tomcat-9.0.50/webapps/manager/META-INF
     #    remote_src: yes
@@ -49,40 +49,40 @@
        - Reload SystemD
        - Restart tomcat
     - name: copy host manager context.xml
-      copy:
+       copy:
         src: hostmanager-context.xml
         dest: /opt/apache-tomcat-9.0.50/webapps/host-manager/META-INF
      #   remote_src: yes     
 
     - name: Extract Tomcat archive
-      unarchive:
+       unarchive:
         src: /tmp/apache-tomcat-9.0.50.tar.gz
         dest: /opt
         remote_src: yes
         creates: /opt/apache-tomcat-9.0.50
 
     - name: Update Tomcat permissions
-      file:
+       file:
         path: /opt/apache-tomcat-9.0.50/bin/*.sh
         mode: 0755
 
     - name: Create Tomcat systemd service
-      template:
+       template:
         src: tomcat.service.j2
         dest: /etc/systemd/system/tomcat.service
 
     - name: Reload systemd
-      systemd:
+       systemd:
         daemon_reload: yes
 
     - name: Start Tomcat service
-      service:
+       service:
         name: tomcat
         state: started
         enabled: yes
 
     - name: Deploy WAR file
-      copy:
+       copy:
         src: addressbook (5).war
         dest: /opt/apache-tomcat-9.0.50/webapps/your-app.war
         remote_src: yes
@@ -91,6 +91,6 @@
 
       handlers:
     - name: Restart Tomcat
-      service:
+       service:
         name: tomcat
         state: restarted
