@@ -18,7 +18,7 @@
         dest: /tmp/apache-tomcat-9.0.50.tar.gz
         
     - name: Creating a service file
-      copy:
+       copy:
         content: |-
          [Unit]
          Description=Tomcat Service
