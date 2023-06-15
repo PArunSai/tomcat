@@ -20,21 +20,21 @@
     - name: Creating a service file
       copy:
         content: |-
-        [Unit]
-        Description=Tomcat Service
-        Requires=network.target
-        After=network.target
-        [Service]
-        Type=forking
-        Environment="CATALINA_PID=/opt/apache-tomcat-9.0.50/logs/tomcat.pid"
-        Environment="CATALINA_BASE=/opt/apache-tomcat-9.0.50"
-        Environment="CATALINA_HOME=/opt/apache-tomcat-9.0.50"
-        Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
-        ExecStart=/opt/apache-tomcat-9.0.50/bin/startup.sh
-        ExecStop=/opt/apache-tomcat-9.0.50/bin/shutdown.sh
-        Restart=on-abnormal
-        [Install]
-        WantedBy=multi-user.target
+         [Unit]
+         Description=Tomcat Service
+         Requires=network.target
+         After=network.target
+         [Service]
+         Type=forking
+         Environment="CATALINA_PID=/opt/apache-tomcat-9.0.50/logs/tomcat.pid"
+         Environment="CATALINA_BASE=/opt/apache-tomcat-9.0.50"
+         Environment="CATALINA_HOME=/opt/apache-tomcat-9.0.50"
+         Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+         ExecStart=/opt/apache-tomcat-9.0.50/bin/startup.sh
+         ExecStop=/opt/apache-tomcat-9.0.50/bin/shutdown.sh
+         Restart=on-abnormal
+         [Install]
+         WantedBy=multi-user.target
       dest: /etc/systemd/system/tomcat.service
       notify:
        - Reload SystemD
