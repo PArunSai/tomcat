@@ -41,7 +41,7 @@
        - Restart tomcat 
 
     - name: copy manager context.xml
-       copy:
+      copy:
         src: context.xml
         dest: /opt/apache-tomcat-9.0.50/webapps/manager/META-INF
     #    remote_src: yes
