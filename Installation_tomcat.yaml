@@ -1,5 +1,6 @@
 ---
-- hosts: myserver
+- name: Installation of tomcat9 and deploy a war file
+  hosts: myserver
   become: yes
   tasks:
    - name: Update apt cache
