@@ -91,9 +91,9 @@
     - name: Reload SystemD
       systemd:
         daemon-reload: yes
-    - name: Restart tomcat service
-      systemd:
-        name: tomcat
-        enabled: yes
-        state: started
+    #- name: Restart tomcat service
+    #  systemd:
+    #    name: tomcat
+    #    enabled: yes
+    #    state: started
 
