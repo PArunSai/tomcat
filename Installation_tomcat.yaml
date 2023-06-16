@@ -56,7 +56,7 @@
         Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
         ExecStart=/opt/apache-tomcat-9.0.76/bin/startup.sh
         ExecStop=/opt/apache-tomcat-9.0.76/bin/shutdown.sh
-        Restart=on-abnormal
+        Restart=always
         [Install]
         WantedBy=multi-user.target
       dest: /etc/systemd/system/tomcat.service
