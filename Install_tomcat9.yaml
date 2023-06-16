@@ -90,7 +90,6 @@
         remote_src: yes
       notify:
         - Restart Tomcat
-
       handlers:
     - name: Restart Tomcat
       service:
